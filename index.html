@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Booking</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -27,85 +28,123 @@
             </ul>
         </nav>
     </header>
-
     <!--Booking Section-->
     <main class="main-content container">
-        <div class="booking-form">
-            <h3>Booking Flights</h3>
-            <div class="input-group">
-                <label for="">Flying From</label>
-                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
-            </div>
-            <div class="input-group">
-                <label for="">Flying To</label>
-                <input class="inp-style" type="text" name="" placeholder="New York, United States">
-            </div>
-            <div class="inputs">
+        <!-- Booking part -->
+        <div id="booking-area">
+            <div class="booking-form">
+                <h3>Booking Flights</h3>
                 <div class="input-group">
-                    <label" for="">Departure</label>
+                    <label for="">Flying From</label>
+                    <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+                </div>
+                <div class="input-group">
+                    <label for="">Flying To</label>
+                    <input class="inp-style" type="text" name="" placeholder="New York, United States">
+                </div>
+                <div class="inputs">
+                    <div class="input-group">
+                        <label" for="">Departure</label>
+                            <input class="inp-style" type="date" name="">
+                    </div>
+                    <div class="input-group">
+                        <label for="">Return</label>
                         <input class="inp-style" type="date" name="">
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="">Return</label>
-                    <input class="inp-style" type="date" name="">
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">First Class ($150)</label>
+                        <input id="first-class-count" class="inp-style inp-width" type="number" min="0" value="0">
+                    </div>
+                    <div class="plus-minus-btn">
+                        <button onclick="updateFlightBooking('first', true)" class="btn btn-success"><i
+                                class="fas fa-plus"></i></button>
+                        <button onclick="updateFlightBooking('first', false)" class="btn btn-success"><i
+                                class="fas fa-minus"></i></button>
+                    </div>
                 </div>
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">Economy ($100)</label>
+                        <input id="economy-class-count" class="inp-style inp-width" type="number" min="0" value="0">
+                    </div>
+                    <div class="plus-minus-btn">
+                        <button onclick="updateFlightBooking('economy', true);" class="btn btn-success"><i
+                                class="fas fa-plus"></i></button>
+                        <button onclick="updateFlightBooking('economy', false);" class="btn btn-success"><i
+                                class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="calculations mt-3">
+                    <div class="amount">
+                        <div class="left">
+                            <h6>Subtotal</h6>
+                        </div>
+                        <div class="right">
+                            <h6>$<span id="subtotal">00</span></h6>
+                        </div>
+                    </div>
+                    <div class="amount">
+                        <div class="left">
+                            <h6>Charge 10% VAT</h6>
+                        </div>
+                        <div class="right">
+                            <h6>$<span id="vatOn-subtotal">00</span></h6>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="amount">
+                        <div class="left">
+                            <h4>Total</h4>
+                        </div>
+                        <div class="right">
+                            <h4>$<span id="total-amount">00</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <button id="book-now" class="btn-style">Book Now</button>
             </div>
-            <div class="input-group f-class">
-                <div>
-                    <label for="">First Class ($150)</label>
-                    <input id="first-class-count" class="inp-style inp-width" type="number" min="0" value="0">
-                </div>
-                <div class="plus-minus-btn">
-                    <button onclick="updateFlightBooking('first', true)" class="btn btn-success"><i
-                            class="fas fa-plus"></i></button>
-                    <button onclick="updateFlightBooking('first', false)" class="btn btn-success"><i
-                            class="fas fa-minus"></i></button>
-                </div>
-            </div>
-
-            <div class="input-group f-class">
-                <div>
-                    <label for="">Economy ($100)</label>
-                    <input id="economy-class-count" class="inp-style inp-width" type="number" min="0" value="0">
-                </div>
-                <div class="plus-minus-btn">
-                    <button onclick="updateFlightBooking('economy', true);" class="btn btn-success"><i
-                            class="fas fa-plus"></i></button>
-                    <button onclick="updateFlightBooking('economy', false);" class="btn btn-success"><i
-                            class="fas fa-minus"></i></button>
-                </div>
-            </div>
-            <div class="calculations mt-3">
-                <div class="amount">
-                    <div class="left">
-                        <h6>Subtotal</h6>
-                    </div>
-                    <div class="right">
-                        <h6>$<span id="subtotal">00</span></h6>
-                    </div>
-                </div>
-
-                <div class="amount">
-                    <div class="left">
-                        <h6>Charge 10% VAT</h6>
-                    </div>
-                    <div class="right">
-                        <h6>$<span id="vatOn-subtotal">00</span></h6>
-                    </div>
-                </div>
-                <hr>
-                <div class="amount">
-                    <div class="left">
-                        <h4>Total</h4>
-                    </div>
-                    <div class="right">
-                        <h4>$<span id="total-amount">00</span></h4>
-                    </div>
-                </div>
-            </div>
-            <button class="btn-style">Book Now</button>
         </div>
-
+        <!-- confirmation part -->
+        <div id="confirmation-area">
+            <div class="booking-form" style="background-color:azure;">
+                <h3 style="color:tomato">Your Booking is Done</h3>
+                <h5>Thank you for booking with Air Asia</h5>
+                <p>Dear passenger,<br>
+                    Your Dhake, Bangladesh - New York, United States one-way flight is confirmed.</p>
+                <p> We will email your ticket shortly. <br>
+                    Your trip ID is <span class="text-style fw-bold"> S1217240047</span>. Please use this trip ID for
+                    any communication with us.</p>
+                <div class="inputs">
+                    <div>
+                        <p>Departure :</p>
+                        <div class="shadow p-3 mb-4 bg-white rounded">30-Jan-21</div>
+                    </div>
+                    <div>
+                        <p>Return :</p>
+                        <div class="shadow p-3 mb-4 bg-white rounded">1-Feb-21</div>
+                    </div>
+                </div>
+                <p>Flying From :</p>
+                <div class="shadow p-3 mb-4 bg-white rounded">Dhake, Bangladesh</div>
+                <p>Flying To :</p>
+                <div class="shadow p-3 mb-4 bg-white rounded">New York, United States</div>
+                <div class="calculations mt-3">
+                    <div class="amount">
+                        <div class="left">
+                            <h4>Total Price of your Tickets :</h4>
+                        </div>
+                        <div class="right">
+                            <h4>$<span id="total-output">00</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <p>The amount you will pay to the booking. </p>
+                <button id="back-home-page" class="btn-style">Continue Booking</button>
+            </div>
+        </div>
+        <!-- about part -->
         <div class="booking-content">
             <h1>discover <br> around the world</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias
@@ -139,6 +178,19 @@
 
             const totalAmount = subTotalValue + vat;
             document.getElementById('total-amount').innerText = totalAmount;
+            // page changing
+            if (totalAmount != 0) {
+                const bookNow = document.getElementById('book-now');
+                bookNow.addEventListener('click', function () {
+                    const confirmationArea = document.getElementById('confirmation-area');
+                    confirmationArea.style.display = 'block';
+
+                    const bookingArea = document.getElementById('booking-area');
+                    bookingArea.style.display = 'none';
+
+                    document.getElementById('total-output').innerText = totalAmount;
+                });
+            }
         }
         // Function for taking number of first-class and economy-class for money($) calculation
         function InputValue(flightClass) {
@@ -146,55 +198,19 @@
             const flightBookingCount = parseFloat(flightBookingInput);
             return flightBookingCount;
         }
+        // Back to home page 
+        const backkHomePage = document.getElementById('back-home-page');
+        backkHomePage.addEventListener('click', function () {
+            const bookingArea = document.getElementById('booking-area');
+            bookingArea.style.display = 'block';
 
+            const confirmationArea = document.getElementById('confirmation-area');
+            confirmationArea.style.display = 'none';
 
-        // Duplicate functions
-        // function economyClassBooking() {
-        //     const economyClassInput = document.getElementById('economy-class-count').value;
-        //     const economyClassCount = parseFloat(economyClassInput);
-        //     let newCount = economyClassCount;
-        //     if (isIncrement == true) {
-        //         newCount = economyClassCount + 1;
-        //     }
-        //     if (isIncrement == false && newCount > 0) {
-        //         newCount = economyClassCount - 1;
-        //     }
-        //     document.getElementById('economy-class-count').value = newCount;
-        // }
+            document.getElementById('first-class-count').value = 0;
+            document.getElementById('economy-class-count').value = 0;
 
-        // function firstClassBooking() {
-        //     const firstClassInput = document.getElementById('first-class-count').value;
-        //     const firstClassCount = parseFloat(firstClassInput);
-        //     let newCount = firstClassCount;
-        //     if (isIncrement == true) {
-        //         newCount = firstClassCount + 1;
-        //     }
-        //     if (isIncrement == false && newCount > 0) {
-        //         newCount = firstClassCount - 1;
-        //     }
-        //     document.getElementById('first-class-count').value = newCount;
-        // }
-
-
-        // First Class ($150)
-        // plus button
-        // document.getElementById('first-class-increment').addEventListener('click', function () {
-        //     updateFlightBooking('first', true);
-        // });
-        // minus button
-        // document.getElementById('first-class-decrement').addEventListener('click', function () {
-        //     updateFlightBooking('first', false);
-        // });
-
-        // Economy ($100)
-        // plus button
-        // document.getElementById('economy-class-increment').addEventListener('click', function () {
-        //     updateFlightBooking('economy', true);
-        // });
-        // minus button
-        // document.getElementById('economy-class-decrement').addEventListener('click', function () {
-        //     updateFlightBooking('economy', false);
-        // });
+        });
     </script>
     <!--Thank You-->
 </body>

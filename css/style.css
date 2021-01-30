@@ -67,11 +67,7 @@ a.active {
   min-width: 300px;
 }
 .plus-minus-btn {
-  /* color: #3352f2; */
-  /* font-size: 30px; */
-  /* padding: 2px; */
-  margin-top: 32px;
-  /* word-spacing: 20px; */
+  margin-top: 25px;
 }
 .booking-form .calculations {
   margin: 10px 0;
@@ -120,4 +116,10 @@ a.active {
 .amount {
   display: flex;
   justify-content: space-between;
+}
+.text-style {
+  color: tomato;
+}
+#confirmation-area {
+  display: none;
 }
