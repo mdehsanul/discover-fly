@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Booking</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
@@ -51,38 +53,44 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <input id="first-class-count" class="inp-style inp-width" type="number" min="0" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p>+ -</p>
+                    <button onclick="updateFlightBooking('first', true)" class="btn btn-success"><i
+                            class="fas fa-plus"></i></button>
+                    <button onclick="updateFlightBooking('first', false)" class="btn btn-success"><i
+                            class="fas fa-minus"></i></button>
                 </div>
             </div>
 
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <input id="economy-class-count" class="inp-style inp-width" type="number" min="0" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <span>+</span> <span>-</span> </p>
+                    <button onclick="updateFlightBooking('economy', true);" class="btn btn-success"><i
+                            class="fas fa-plus"></i></button>
+                    <button onclick="updateFlightBooking('economy', false);" class="btn btn-success"><i
+                            class="fas fa-minus"></i></button>
                 </div>
             </div>
-            <div class="calculations">
+            <div class="calculations mt-3">
                 <div class="amount">
                     <div class="left">
-                        <p>Subtotal</p>
+                        <h6>Subtotal</h6>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <h6>$<span id="subtotal">00</span></h6>
                     </div>
                 </div>
 
                 <div class="amount">
                     <div class="left">
-                        <p>Charge 10% VAT</p>
+                        <h6>Charge 10% VAT</h6>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <h6>$<span id="vatOn-subtotal">00</span></h6>
                     </div>
                 </div>
                 <hr>
@@ -91,7 +99,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <h4>$<span id="total-amount">00</span></h4>
                     </div>
                 </div>
             </div>
@@ -105,6 +113,89 @@
                 voluptatibus quam</p>
         </div>
     </main>
+    <script>
+        // Function for calculating the total number of Flight Booking
+        function updateFlightBooking(flightClass, isIncrement) {
+            const flightBookingInput = InputValue(flightClass);
+            let newflightBookingCount = flightBookingInput;
+            if (isIncrement == true) {
+                newflightBookingCount = flightBookingInput + 1;
+            }
+            if (isIncrement == false && newflightBookingCount > 0) {
+                newflightBookingCount = flightBookingInput - 1;
+            }
+            document.getElementById(flightClass + '-class-count').value = newflightBookingCount;
+            totalValueCalculation();
+        }
+        // Function for calculating the total amount of money($)
+        function totalValueCalculation() {
+            const firstClassCount = InputValue('first');
+            const economyClassCount = InputValue('economy');
+            const subTotalValue = firstClassCount * 150 + economyClassCount * 100;
+            document.getElementById('subtotal').innerText = subTotalValue;
+
+            const vat = subTotalValue * 0.1;
+            document.getElementById('vatOn-subtotal').innerText = vat;
+
+            const totalAmount = subTotalValue + vat;
+            document.getElementById('total-amount').innerText = totalAmount;
+        }
+        // Function for taking number of first-class and economy-class for money($) calculation
+        function InputValue(flightClass) {
+            const flightBookingInput = document.getElementById(flightClass + '-class-count').value;
+            const flightBookingCount = parseFloat(flightBookingInput);
+            return flightBookingCount;
+        }
+
+
+        // Duplicate functions
+        // function economyClassBooking() {
+        //     const economyClassInput = document.getElementById('economy-class-count').value;
+        //     const economyClassCount = parseFloat(economyClassInput);
+        //     let newCount = economyClassCount;
+        //     if (isIncrement == true) {
+        //         newCount = economyClassCount + 1;
+        //     }
+        //     if (isIncrement == false && newCount > 0) {
+        //         newCount = economyClassCount - 1;
+        //     }
+        //     document.getElementById('economy-class-count').value = newCount;
+        // }
+
+        // function firstClassBooking() {
+        //     const firstClassInput = document.getElementById('first-class-count').value;
+        //     const firstClassCount = parseFloat(firstClassInput);
+        //     let newCount = firstClassCount;
+        //     if (isIncrement == true) {
+        //         newCount = firstClassCount + 1;
+        //     }
+        //     if (isIncrement == false && newCount > 0) {
+        //         newCount = firstClassCount - 1;
+        //     }
+        //     document.getElementById('first-class-count').value = newCount;
+        // }
+
+
+        // First Class ($150)
+        // plus button
+        // document.getElementById('first-class-increment').addEventListener('click', function () {
+        //     updateFlightBooking('first', true);
+        // });
+        // minus button
+        // document.getElementById('first-class-decrement').addEventListener('click', function () {
+        //     updateFlightBooking('first', false);
+        // });
+
+        // Economy ($100)
+        // plus button
+        // document.getElementById('economy-class-increment').addEventListener('click', function () {
+        //     updateFlightBooking('economy', true);
+        // });
+        // minus button
+        // document.getElementById('economy-class-decrement').addEventListener('click', function () {
+        //     updateFlightBooking('economy', false);
+        // });
+    </script>
     <!--Thank You-->
 </body>
 
